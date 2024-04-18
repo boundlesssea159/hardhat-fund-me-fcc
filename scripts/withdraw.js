@@ -1,10 +1,10 @@
 require("hardhat")
 const {getNamedAccounts, ethers} = require("hardhat");
-const {developmentAddress} = require("../helper-hardhat-config");
+const {developmentFeedDataAddress} = require("../helper-hardhat-config");
 const {parseEther} = require("ethers");
 
 async function main() {
-    let contract = await ethers.getContractAt("FundMe", developmentAddress);
+    let contract = await ethers.getContractAt("FundMe", developmentFeedDataAddress);
     const transactionResponse = await contract.withdraw()
     await transactionResponse.waitForTransaction()
     console.log("withdraw!")

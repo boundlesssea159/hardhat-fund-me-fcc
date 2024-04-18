@@ -1,6 +1,6 @@
-const {ethers, deployments} = require("hardhat")
+const {ethers, deployments, network} = require("hardhat")
 const {assert, expect} = require("chai")
-const {developmentChains, developmentAddress} = require("../../helper-hardhat-config")
+const {developmentChains, networkConfig} = require("../../helper-hardhat-config")
 
 developmentChains.includes(network.name) ?
     describe.skip
@@ -10,7 +10,7 @@ developmentChains.includes(network.name) ?
         const sendValue = ethers.parseEther("0.1")
         beforeEach(async () => {
             deployer = (await getNamedAccounts()).deployer
-            fundMe = await ethers.getContractAt("FundMe", developmentAddress);
+            fundMe = await ethers.getContractAt("FundMe", [networkConfig[network.config.chainId]["ethUsdPriceFeed"]]);
         });
 
         it('should allow people to fund and withdraw', async function () {
