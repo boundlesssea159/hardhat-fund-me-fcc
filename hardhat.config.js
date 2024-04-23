@@ -1,8 +1,8 @@
 require("@nomicfoundation/hardhat-toolbox");
-require('hardhat-deploy');
 require("hardhat-gas-reporter")
 require("solidity-coverage")
 require("@nomicfoundation/hardhat-verify")
+require("hardhat-deploy")
 
 const vars = require("hardhat/config").vars;
 

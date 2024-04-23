@@ -1,19 +1,19 @@
 const {network} = require("hardhat");
 const {networkConfig, developmentChains} = require("../helper-hardhat-config");
 const {verify} = require("../utils/verify")
+const net = require("net");
 
 module.exports = async ({getNamedAccounts, deployments}) => {
     const {deploy, log} = deployments
     const {deployer} = await getNamedAccounts()
-    const chainId = network.config.chainId
-
+    const networkName = network.name
     let ethUsdPriceFeedAddress
-    if (chainId === 31337) {
+    if (networkName === "hardhat") {
         const ethUsdAggregator = await deployments.get("MockV3Aggregator")
         ethUsdPriceFeedAddress = ethUsdAggregator.address
         console.log("mock ethUsdAggregator address:", ethUsdAggregator.address)
     } else {
-        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+        ethUsdPriceFeedAddress = networkConfig[networkName]["ethUsdPriceFeed"]
         console.log("dev ethUsdAggregator address:", ethUsdAggregator.address)
     }
     log("----------------------------------------------------")
