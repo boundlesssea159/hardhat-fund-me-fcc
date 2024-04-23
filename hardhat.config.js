@@ -2,6 +2,8 @@ require("@nomicfoundation/hardhat-toolbox");
 require('hardhat-deploy');
 require("hardhat-gas-reporter")
 require("solidity-coverage")
+require("@nomicfoundation/hardhat-verify")
+
 const vars = require("hardhat/config").vars;
 
 const RPC_KEY = vars.get("RPC_KEY");

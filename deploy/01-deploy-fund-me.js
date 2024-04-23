@@ -1,7 +1,7 @@
 const {network} = require("hardhat");
-const {networkConfig} = require("../helper-hardhat-config");
+const {networkConfig, developmentChains} = require("../helper-hardhat-config");
+const {verify} = require("../utils/verify")
 
-// todo why the script can't work?
 module.exports = async ({getNamedAccounts, deployments}) => {
     const {deploy, log} = deployments
     const {deployer} = await getNamedAccounts()
@@ -9,9 +9,9 @@ module.exports = async ({getNamedAccounts, deployments}) => {
 
     let ethUsdPriceFeedAddress
     if (chainId === 31337) {
-        console.log("mock ethUsdAggregator address:", ethUsdAggregator.address)
         const ethUsdAggregator = await deployments.get("MockV3Aggregator")
         ethUsdPriceFeedAddress = ethUsdAggregator.address
+        console.log("mock ethUsdAggregator address:", ethUsdAggregator.address)
     } else {
         ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
         console.log("dev ethUsdAggregator address:", ethUsdAggregator.address)
