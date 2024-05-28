@@ -11,10 +11,10 @@ module.exports = async ({getNamedAccounts, deployments}) => {
     if (networkName === "hardhat") {
         const ethUsdAggregator = await deployments.get("MockV3Aggregator")
         ethUsdPriceFeedAddress = ethUsdAggregator.address
-        console.log("mock ethUsdAggregator address:", ethUsdAggregator.address)
+        console.log("mock ethUsdAggregator address:", ethUsdPriceFeedAddress)
     } else {
         ethUsdPriceFeedAddress = networkConfig[networkName]["ethUsdPriceFeed"]
-        console.log("dev ethUsdAggregator address:", ethUsdAggregator.address)
+        console.log("dev ethUsdAggregator address:", ethUsdPriceFeedAddress)
     }
     log("----------------------------------------------------")
     log("Deploying FundMe and waiting for confirmations...")
